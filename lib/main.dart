@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:path_provider/path_provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -110,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 90,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: createChangeImageButtons(),
+                children: createChangeBlendButtons(),
               ),
             ),
     );
@@ -147,16 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
         children: widgets,
       ),
     );
-  }
-  
-  Future saveLocalImage(File image) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final path = directory.path;
-    final imagePath = '$path/image.png';
-    File imageFile = File(imagePath);
-    
-    var savedFile = await imageFile.writeAsBytes(await image.readAsBytes());
-    return savedFile;
   }
 
   Future getImage(ImageSource imageSource) async {
@@ -199,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  List<Widget> createChangeImageButtons() {
+  List<Widget> createChangeBlendButtons() {
     List<Widget> widgets = List<Widget>();
 
     blendDataMap.forEach(
